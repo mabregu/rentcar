@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\ManufacturerResource;
+use App\Models\Manufacturer;
 
 class ManufacturerController extends Controller
 {
-    //
+    public function index()
+    {
+        return ManufacturerResource::collection(Manufacturer::all());
+    }
 }
