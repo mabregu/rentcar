@@ -35,4 +35,16 @@ class AuthController extends Controller
             return response()->json($e->validator->errors());
         }
     }
+
+    public function logout()
+    {
+        request()->user()->token()->revoke();
+
+        return response()->json(['message' => 'Success logout']);
+    }
+
+    public function user()
+    {
+        return response()->json(request()->user());
+    }
 }

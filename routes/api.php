@@ -35,5 +35,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/rentals/paginated', 'RentalController@paginate');
     Route::get('/rentals/{customer}/customer', 'RentalController@forCustomer');
     Route::get('/vehicles/{id}', 'VehicleController@show');
+
+    Route::post('/auth/logout', 'AuthController@logout');
+    Route::get('/auth/user', 'AuthController@user');
+
 });
 
