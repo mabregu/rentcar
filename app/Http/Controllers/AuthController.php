@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Validation\ValidationException;
+
+class AuthController extends Controller
+{
+    public function login()
+    {
+        try {
+            //code...
+            $this->validate(request(), [
+                'email' => 'required|email',
+                'password' => 'required|string',
+            ]);
+
+            $credentials = request(['email', 'password']);
+
+            if (!auth()->attempt($credentials)) {
+                return response()->json(['message' => 'Datos incorrectos', 401]);
+            }
+
+            $user = request()->user();
+
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            $token->save();
+
+            return response()->json([
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer'
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json($e->validator->errors());
+        }
+    }
+}

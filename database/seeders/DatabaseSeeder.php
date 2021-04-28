@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\RentalStatus::factory(1)->create(['status' => 'RENTED']);
         \App\Models\RentalStatus::factory(1)->create(['status' => 'AVAILABLE']);
 
-        \App\Models\Rental::factory(1)->create();
+        \App\Models\Rental::factory(50)->create();
 
     }
 }
